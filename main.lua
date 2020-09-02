@@ -241,10 +241,20 @@ function love.update(dt)
         player1.dy = 0
     end
 
-    -- player 2
+    --[[ player 2
     if love.keyboard.isDown('up') then
         player2.dy = -PADDLE_SPEED
     elseif love.keyboard.isDown('down') then
+        player2.dy = PADDLE_SPEED
+    else
+        player2.dy = 0
+    end ]]
+
+
+    -- AI logic for self-moving paddle
+    if ball.y < player2.y then
+        player2.dy = -PADDLE_SPEED
+    elseif ball.y > player2.y then
         player2.dy = PADDLE_SPEED
     else
         player2.dy = 0
@@ -307,7 +317,7 @@ function love.draw()
     -- begin drawing with push, in our virtual resolution
     push:apply('start')
 
-    love.graphics.clear(40, 45, 52, 255)
+    love.graphics.clear(40/255, 45/255, 52/255, 255/255)
     
     -- render different things depending on which part of the game we're in
     if gameState == 'start' then
