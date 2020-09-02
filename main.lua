@@ -252,7 +252,9 @@ function love.update(dt)
 
 
     -- AI logic for self-moving paddle
-    if ball.y < player2.y then
+    if player2.y <= ball.y + 2 and player2.y >= ball.y - 2 then
+        player2.dy = 0
+    elseif ball.y < player2.y then
         player2.dy = -PADDLE_SPEED
     elseif ball.y > player2.y then
         player2.dy = PADDLE_SPEED
